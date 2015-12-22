@@ -40,3 +40,25 @@
         placeholderData : 'simplePlaceholder.placeholding'
       };
 
+if(options) $.extend(config, options);
+      $.extend($.simplePlaceholder, config);
+
+      this.each(function() {
+        var $this = $(this);
+        $this.focus($.simplePlaceholder.hidePlaceholder);
+        $this.blur($.simplePlaceholder.showPlaceholder);
+        $this.data($.simplePlaceholder.placeholderData, false);
+        if($this.val() == '') {
+          $this.val($this.attr("placeholder"));
+          $this.addClass($.simplePlaceholder.placeholderClass);
+          $this.data($.simplePlaceholder.placeholderData, true);
+        }
+        $this.addClass("simple-placeholder");
+        $(this.form).submit($.simplePlaceholder.preventPlaceholderSubmit);
+      });
+    }
+
+    return this;
+  };
+
+})(jQuery);
